@@ -1,0 +1,17 @@
+import { Injectable, HttpException } from '@nestjs/common';
+import { InjectModel } from 'nestjs-typegoose';
+import { ReturnModelType } from '@typegoose/typegoose';
+
+import { BaseService } from '@common/core';
+
+import { <%- cameName %> } from '@libs/db/models/<%- name %>.model';
+
+@Injectable()
+export class <%- cameName %>Service extends BaseService<<%- cameName %>> {
+  constructor(
+    @InjectModel(<%- cameName %>)
+    private readonly <%- name %>Model: ReturnModelType<typeof <%- cameName %>>,
+  ) {
+    super(<%- name %>Model);
+  }
+}

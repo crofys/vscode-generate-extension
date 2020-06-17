@@ -1,0 +1,61 @@
+import {
+  Controller,
+  Query,
+  Inject,
+  Get,
+  Post,
+  Delete,
+  Put,
+  Body,
+  Param,
+} from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { QueryDto } from '@common/core';
+
+import { Create<%- cameName %>Dto, LoginDto } from './<%- name %>.dto';
+import { <%- cameName %>Service } from './<%- name %>.service';
+
+@ApiBearerAuth()
+@Controller('<%- name %>')
+@ApiTags('<%- cameName %>管理')
+export class <%- cameName %>Controller {
+  constructor(
+    @Inject(<%- cameName %>Service) private readonly <%- name %>Service: <%- cameName %>Service,
+  ) {}
+
+  @Get()
+  @ApiOperation({ summary: '列表' })
+  async find(@Query() query: QueryDto): Promise<any> {
+    const { keyword = '', ...params } = query;
+    const conditions = {
+      $or: [
+        { name: { $regex: new RegExp(keyword, 'i') } },
+      ],
+    };
+    return await this.<%- name %>Service.findByPagination(conditions, params);
+  }
+
+  @Post()
+  @ApiOperation({ summary: '创建' })
+  async create(@Body() body: Create<%- cameName %>Dto): Promise<any> {
+    return await this.<%- name %>Service.create(body);
+  }
+
+  @Put(':id')
+  @ApiOperation({ summary: '更新' })
+  async update(@Body() body: any, @Param('id') id: string): Promise<any> {
+    return await this.<%- name %>Service.findIdAndUpdate(id, body);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: '删除' })
+  async delete(@Param('id') id: string): Promise<any> {
+    return await this.<%- name %>Service.findIdAndRemove(id);
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: '详情' })
+  async details(@Param('id') id: string): Promise<any> {
+    return await this.<%- name %>Service.findOne(id);
+  }
+}

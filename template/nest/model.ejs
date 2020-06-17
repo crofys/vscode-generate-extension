@@ -1,0 +1,11 @@
+import { prop, modelOptions, plugin } from '@typegoose/typegoose';
+import { Schema } from 'mongoose';
+
+@modelOptions({
+  options: { customName: '<%- name %>' },
+  schemaOptions: { timestamps: true },
+})
+export class <%- cameName %> {
+  @prop({ required: true, maxlength: 30, default: '', unique: true })
+  name: string;
+}

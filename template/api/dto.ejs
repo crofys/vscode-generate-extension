@@ -1,0 +1,9 @@
+import { IsNotEmpty, MaxLength, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class Create<%- cameName %>Dto {
+  @ApiProperty({ description: '账号' })
+  @IsNotEmpty()
+  @IsString()
+  account: string;
+}

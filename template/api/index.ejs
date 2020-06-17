@@ -1,0 +1,17 @@
+export * from './<%- name %>.constant';
+export * from './<%- name %>.interface';
+export * from './<%- name %>.dto';
+
+import { Get } from '../request';
+import {  GET_<%- name.toUpperCase() %>_LIST } from './<%- name %>.constant';
+import { <%- cameName %>Dto } from './<%- name %>.dto';
+import { I<%- cameName %> } from './<%- name %>.interface';
+
+/**
+ * @description 查询-<%- name %>列表
+ * @param {<%- cameName %>Dto} body
+ * @returns {Promise<I<%- cameName %>>}
+ */
+export const GetUsersApi = (body: <%- cameName %>Dto): Promise<I<%- cameName %>> => {
+  return Get(GET_<%- name.toUpperCase() %>_LIST, { params });
+};
