@@ -3,7 +3,7 @@
   "displayName": "vscode-generate-react-extension",
   "description": "自动创建模版文件",
   "version": "0.2.3",
-  "publisher":"crofys",
+  "publisher": "crofys",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.45.0"
@@ -12,36 +12,20 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-generate-react-extension.generate-react",
-    "onCommand:vscode-generate-react-extension.generate-api",
-    "onCommand:vscode-generate-nest-extension.generate-module"
+    "onCommand:vscode-generate-react-extension.generate"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vscode-generate-react-extension.generate-react",
-        "title": "[GZ] Generate File React"
-      },
-      {
-        "command": "vscode-generate-react-extension.generate-api",
-        "title": "[GZ] Generate Module Api"
-      },
-      {
-        "command": "vscode-generate-nest-extension.generate-module",
-        "title": "[GZ] Generate Module Nest"
+        "command": "vscode-generate-react-extension.generate",
+        "title": "[GZ] Generate File"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "vscode-generate-react-extension.generate-react"
-        },
-        {
-          "command": "vscode-generate-react-extension.generate-api"
-        },
-        {
-          "command": "vscode-generate-nest-extension.generate-module"
+          "command": "vscode-generate-react-extension.generate"
         }
       ]
     }
@@ -56,6 +40,7 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/ejs": "^3.0.3",
     "@types/glob": "^7.1.1",
     "@types/mocha": "^7.0.2",
@@ -63,10 +48,16 @@
     "@types/vscode": "^1.45.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "alfy": "^0.9.1",
+    "axios": "^0.19.2",
     "consola": "^2.12.1",
     "eslint": "^6.8.0",
     "glob": "^7.1.6",
+    "lodash.difference": "^4.5.0",
+    "lodash.sample": "^4.2.1",
+    "lodash.union": "^4.6.0",
     "mocha": "^7.1.2",
+    "translation.js": "^0.7.15",
     "typescript": "^3.8.3",
     "vscode-test": "^1.3.0"
   },
