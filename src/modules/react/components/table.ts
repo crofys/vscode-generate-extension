@@ -1,10 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import axios from 'axios';
-import * as fs from 'fs';
-import { google } from 'translation.js';
-import { message } from '../../utils/message';
-const config = require('../../utils/config');
+const config = require('../../../utils/config');
 import {
   toUpperCameCase,
   toLocaleLowerCameCase,
@@ -15,9 +12,8 @@ import {
   namedConst,
   underline,
   hyphen,
-} from '../../utils/index';
-
-export const createReactHandler = async (e: vscode.Uri) => {
+} from '../../../utils/index';
+export const createTableHandler = async (e: vscode.Uri) => {
   const creatFile = (quickPickName: string) => {
     if (quickPickName) {
       const dir = path.normalize(e.fsPath);
@@ -25,7 +21,7 @@ export const createReactHandler = async (e: vscode.Uri) => {
         quickPickName === 'index' ? path.basename(dir) : quickPickName;
       // ;-转换模版文件
       replaceEjsTemplate(
-        'template/react/base.ejs',
+        'template/react/table/table.ejs',
         path.resolve(dir, quickPickName + '.tsx'),
         {
           CameName: toUpperCameCase(name),

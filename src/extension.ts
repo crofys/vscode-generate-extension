@@ -1,31 +1,16 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import {
-  createReactHandler,
-  createNestHandler,
-  createApiHandler,
-} from './constant/index';
+import { MODULES } from './constant/modules';
 import { message } from './utils/message';
 async function init(e: vscode.Uri) {
   const stat = fs.statSync(e.fsPath);
   if (stat.isDirectory()) {
     try {
-      const inputName = await vscode.window.showQuickPick([
-        'react',
-        'api',
-        'module',
-      ]);
-      switch (inputName) {
-        case 'react':
-          await createReactHandler(e);
-          break;
-        case 'api':
-          await createApiHandler(e);
-          break;
-        case 'module':
-          await createNestHandler(e);
-          break;
-      }
+      const inputName: any = await vscode.window.showQuickPick(
+        Object.keys(MODULES)
+      );
+      console.log(inputName, 'inputName');
+      await MODULES[inputName](e);
     } catch (err) {
       message.error('创建文件失败');
       console.log(err);
